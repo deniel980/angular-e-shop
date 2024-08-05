@@ -7,12 +7,20 @@ import { Product } from '../models/product';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
-  private apiUrl = environment.apiUrl + '/products';
+export class CartService {
+  private apiUrl = environment.apiUrl + '/cart';
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Product[]> {
+  addToCart(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, product);
+  }
+
+  getCartItems(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
+  }
+
+  clearCart(): Observable<void> {
+    return this.http.delete<void>(this.apiUrl);
   }
 }
