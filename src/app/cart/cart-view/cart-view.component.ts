@@ -29,7 +29,11 @@ export class CartViewComponent implements OnInit {
     return total;
   }
 
-  clearCart():void{
+  clearCart(): void {
     this.cartService.clearCart().subscribe();
+  }
+
+  checkout(): void {
+    this.cartService.checkout(this.cartItems).subscribe();
   }
 }
